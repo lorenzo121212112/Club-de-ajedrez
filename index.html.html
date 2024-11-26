@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club de ajedrez Tacuarembo</title>
+    <style>
+        /* Estilos generales */
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+        }
+        
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+            flex-grow: 1;
+        }
+        
+        nav a:hover {
+            background-color: #555;
+        }
+        
+        .section {
+            display: none;
+            padding: 20px;
+        }
+        
+        #calendar,
+        #gallery,
+        #elo,
+        #fta {
+            margin-top: 20px;
+        }
+        /* Estilos para el calendario */
+        
+        #calendar {
+            text-align: center;
+        }
+        
+        .month {
+            display: inline-block;
+            width: 350px;
+            /* Aumento el ancho a 350px */
+            margin: 20px;
+            /* Aumento el margen para separar los calendarios */
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+        
+        .month h3 {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            margin: 0;
+            text-align: center;
+        }
+        
+        .month table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        .month th,
+        .month td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .month td.selected {
+            background-color: #4CAF50;
+            color: white;
+        }
+        /* Estilos para la galería de fotos */
+        
+        #gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        
+        #gallery img {
+            max-width: 200px;
+            margin: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+        /* Estilos para la tabla de Elo departamental */
+        
+        #elo table {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        
+        #elo th,
+        #elo td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        /* Estilos para la sección FTA */
+        
+        #fta {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Encabezado -->
+    <header>
+        <h1>Club de ajedrez Tacuarembo</h1>
+    </header>
+
+    <!-- Menú de navegación -->
+    <nav>
+        <a href="#" onclick="showSection('calendar')">Calendario de Torneos</a>
+        <a href="#" onclick="showSection('gallery')">Galería de Fotos</a>
+        <a href="#" onclick="showSection('elo')">Elo Departamental</a>
+        <a href="#" onclick="showSection('fta')">FTA</a>
+    </nav>
+
+    <!-- Secciones -->
+    <div id="calendar" class="section">
+        <h2>Calendario de Torneos 2024</h2>
+        <div id="calendar-container"></div>
+    </div>
+
+    <div id="gallery" class="section">
+        <h2>Galería de Fotos</h2>
+        <div id="gallery-container">
+            <!-- Se pueden agregar imágenes aquí -->
+            <img src="https://via.placeholder.com/200" alt="Foto 1">
+            <img src="https://via.placeholder.com/200" alt="Foto 2">
+            <img src="https://via.placeholder.com/200" alt="Foto 3">
+            <!-- Más fotos aquí -->
+        </div>
+    </div>
+
+    <div id="elo" class="section">
+        <h2>Elo Departamental</h2>
+        <table>
+            <tr>
+                <th>Nombre</th>
+                <th>Valor Elo</th>
+            </tr>
+            <tr>
+                <td>Jugador 1</td>
+                <td>2400</td>
+            </tr>
+            <tr>
+                <td>Jugador 2</td>
+                <td>2300</td>
+            </tr>
+            <tr>
+                <td>Jugador 3</td>
+                <td>2200</td>
+            </tr>
+            <tr>
+                <td>Jugador 4</td>
+                <td>2100</td>
+            </tr>
+            <tr>
+                <td>Jugador 5</td>
+                <td>2000</td>
+            </tr>
+            <tr>
+                <td>Jugador 6</td>
+                <td>1900</td>
+            </tr>
+            <tr>
+                <td>Jugador 7</td>
+                <td>1800</td>
+            </tr>
+            <tr>
+                <td>Jugador 8</td>
+                <td>1700</td>
+            </tr>
+            <tr>
+                <td>Jugador 9</td>
+                <td>1600</td>
+            </tr>
+            <tr>
+                <td>Jugador 10</td>
+                <td>1500</td>
+            </tr>
+            <!-- Más jugadores pueden agregarse -->
+        </table>
+    </div>
+
+    <div id="fta" class="section">
+        <h2>Definición FTA</h2>
+        <p>En esta sección se puede poner una definición detallada sobre FTA.</p>
+    </div>
+
+    <script>
+        // Función para mostrar las secciones al hacer clic
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Mostrar la sección seleccionada
+            const section = document.getElementById(sectionId);
+            section.style.display = 'block';
+        }
+
+        // Función para crear un calendario
+        function createCalendar() {
+            const months = [{
+                    name: "Enero",
+                    days: 31
+                }, {
+                    name: "Febrero",
+                    days: 29
+                }, // 2024 es bisiesto
+                {
+                    name: "Marzo",
+                    days: 31
+                }, {
+                    name: "Abril",
+                    days: 30
+                }, {
+                    name: "Mayo",
+                    days: 31
+                }, {
+                    name: "Junio",
+                    days: 30
+                }, {
+                    name: "Julio",
+                    days: 31
+                }, {
+                    name: "Agosto",
+                    days: 31
+                }, {
+                    name: "Septiembre",
+                    days: 30
+                }, {
+                    name: "Octubre",
+                    days: 31
+                }, {
+                    name: "Noviembre",
+                    days: 30
+                }, {
+                    name: "Diciembre",
+                    days: 31
+                }
+            ];
+
+            const calendarContainer = document.getElementById('calendar-container');
+            calendarContainer.innerHTML = ""; // Limpiar el contenedor
+
+            months.forEach(month => {
+                let monthHtml = `<div class="month">
+                                    <h3>${month.name}</h3>
+                                    <table>
+                                        <tr>
+                                            <th>Lun</th>
+                                            <th>Mar</th>
+                                            <th>Mié</th>
+                                            <th>Jue</th>
+                                            <th>Vie</th>
+                                            <th>Sáb</th>
+                                            <th>Dom</th>
+                                        </tr>`;
+
+                let firstDay = new Date(`2024-${months.indexOf(month) + 1}-01`).getDay(); // Primer día del mes
+                let dayCounter = 1;
+                let rows = Math.ceil((month.days + firstDay) / 7);
+
+                // Crear las filas del calendario
+                for (let row = 0; row < rows; row++) {
+                    monthHtml += "<tr>";
+                    for (let col = 0; col < 7; col++) {
+                        // Verifica si la celda está vacía o contiene un día válido
+                        if ((row === 0 && col < firstDay) || dayCounter > month.days) {
+                            monthHtml += "<td></td>";
+                        } else {
+                            monthHtml += `<td onclick="toggleDaySelection(this)">${dayCounter}</td>`;
+                            dayCounter++;
+                        }
+                    }
+                    monthHtml += "</tr>";
+                }
+
+                monthHtml += "</table></div>";
+                calendarContainer.innerHTML += monthHtml;
+            });
+        }
+
+        // Función para seleccionar/deseleccionar días
+        function toggleDaySelection(cell) {
+            cell.classList.toggle('selected');
+        }
+
+        // Inicializar el calendario cuando cargue la página
+        window.onload = function() {
+            createCalendar();
+            showSection('calendar'); // Mostrar la sección de calendario por defecto
+        };
+    </script>
+
+</body>
+
+</html>
